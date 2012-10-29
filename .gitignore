@@ -4,3 +4,6 @@
 *.iml
 pre-process/node_modules
 src/btData.js
+config/browserSet.js
+config/modernizrToCaniuseMapping.js
+browserTest-min.js

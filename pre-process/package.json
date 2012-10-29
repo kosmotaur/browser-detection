@@ -1,0 +1,15 @@
+{
+  "author"       : "Marek Stasikowski <marek.stasikowski@gmail.com>",
+  "name"         : "caniuse-data-preprocessor",
+  "description"  : "Fetch latest data from caniuse.com and map it to comply with modernizr.js feature support objects key names (Modernizr[key_name]).",
+  "version"      : "0.0.1",
+  "main"         : "index.js",
+  "engines"      : {
+    "node" : ">=0.8"
+  },
+  "dependencies" : {
+    "underscore" : "~>1",
+    "when"       : "~>1",
+    "uglify-js2" : "~>2"
+  }
+}
