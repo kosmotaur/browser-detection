@@ -2,3 +2,6 @@
 .DS_Store
 .idea
 *.iml
+prepare/node_modules
+supportData.js
+browserVersions.js
