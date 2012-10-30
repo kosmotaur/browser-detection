@@ -23,6 +23,8 @@
     var UglifyJS = require("uglify-js2");
     var modernizrToCaniuseMapping = require("../config/modernizrToCaniuseMapping.js").modernizrToCaniuseMapping;
 
+    var minify = true;
+
     var gitDeferred = when.defer();
     exec("git submodule init && git submodule update", {
         cwd : "../"
@@ -112,23 +114,46 @@
             );
         });
     });
-
-    var writeMinifiedDeferred = when.defer();
+    var concatenate = function(files) {
+        var content = '';
+        var d = when.defer();
+        when.all(files.map(function(path) {
+            var d = when.defer();
+            fs.readFile(path, function(err, data) {
+                if (err) {
+                    throw err;
+                }
+                content += '\n\n' + data;
+                d.resolve();
+            });
+            return d;
+        }), function() {
+            d.resolve(content);
+        });
+        return d;
+    };
+    var writeBrowserFileDeferred = when.defer();
     writeDataDeferred.then(function(result, path) {
-        writeMinifiedDeferred.resolve(UglifyJS.minify(
-            [
-                "../src/namespace.js",
-                "../config/browserSet.js",
-                "../src/btData.js",
-                "../src/browserTest.js"
-            ]
-        ).code);
+        var files = [
+            "../src/namespace.js",
+            "../config/browserSet.js",
+            "../src/btData.js",
+            "../src/browserTest.js"
+        ];
+        if (minify) {
+            writeBrowserFileDeferred.resolve(UglifyJS.minify(files).code);
+        }
+        else {
+            concatenate(files).then(function(content) {
+                writeBrowserFileDeferred.resolve(content);
+            });
+        }
     });
 
 
-    writeMinifiedDeferred.then(function(code) {
+    writeBrowserFileDeferred.then(function(code) {
         fs.writeFile(
-            "../browserTest-min.js",
+            "../browserTest" + (minify ? "-min" : "") + ".js",
             code,
             function(err) {
                 console.log(err || "browser script written to ../browserTest-min.js");
