@@ -36,10 +36,7 @@ See ``test.html`` file to see an example.
 		* if Modernizr indicates feature is supported, get all browsers/versions from feature support data which do not support that feature and remove those browseres/versions from set of all browsers
 		* if Modernizr indicates feature is not supported, get all browsers/versions from feature support data which support that feature and remove those browseres/versions from from set of all browsers
 		* if browsers remaining in the initial set of all browsers is a non-emtpy subset of checked-for browsers set, the currently checked browser is within that set
-		* if browsers remaining in the initial set of all browsers is non-emtpy and has together with checked-for browsers set:
-        * a non-empty intersection
-        * a non-empty difference
-      then it's not definitive if the current browser falls into the set of checked-for browser set, move on to fallback
+		* if browsers remaining in the initial set of all browsers is non-emtpy and has together with checked-for browsers set: a non-empty intersection and a non-empty difference, then it's not definitive if the current browser falls into the set of checked-for browser set, move on to fallback
 		* if remaining browsers is an empty set, move on to fallback
 * userAgent sniffing as fallback, based on [jQuery](http://jquery.com)'s solution
 
