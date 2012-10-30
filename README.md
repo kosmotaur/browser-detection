@@ -35,9 +35,9 @@ See ``test.html`` file to see an example.
 * userAgent sniffing as fallback, based on [jQuery](http://jquery.com)'s solution
 
 ## Updating and pre-processing data
-``$ cd prepare``
-``$ npm install`` (only have to do this once)
-``$ node index.js``
+1. ``$ cd pre-proces``
+2. ``$ npm install`` (only have to do this once)
+3. ``$ node index.js``
 
 ## Prerequisites
 
