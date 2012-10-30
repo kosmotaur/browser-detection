@@ -16,5 +16,5 @@ BT.targetBrowserSet = { // the set you are trying to determine if the browser is
     "firefox" : ["14", "15", "16"],
     "chrome"  : ["20", "21", "22"],
     "safari"  : ["4.0", "5.1", "6"],
-    "opera"   : ["10.6", "11.6", "12.5"]
+    "opera"   : ["10", "11", "12"]
 };
