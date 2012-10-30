@@ -24,8 +24,8 @@
     var modernizrToCaniuseMapping = require("../config/modernizrToCaniuseMapping.js").modernizrToCaniuseMapping;
 
     var gitDeferred = when.defer();
-    exec("git pull", {
-        cwd : "../caniuse"
+    exec("git submodule init && git submodule update", {
+        cwd : "../"
     }, function(err, stdout, stderr) {
         if (err === null) {
             console.log(stdout);
@@ -33,7 +33,21 @@
         else {
             console.log(stderr);
         }
-        gitDeferred.resolve(err, stdout, stderr);
+        exec("git checkout master", {
+            cwd : "../caniuse"
+        }, function(err, stdout, stderr) {
+            if (err === null) {
+                console.log(stdout);
+            }
+            else {
+                console.log(stderr);
+            }
+            exec("git pull", {
+                cwd : "../"
+            }, function(err, stdout, stderr) {
+                gitDeferred.resolve(err, stdout, stderr);
+            });
+        });
     });
 
     var jsonDataDeferred = when.defer();
