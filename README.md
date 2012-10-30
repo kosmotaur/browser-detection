@@ -8,11 +8,12 @@ The script takes into account a set of browsers you wanna determine if the visit
 
 ## Usage
 
-1. In config directory, copy templates to the same directory removing 'template.' from the name. Change contents as needed.
+1. In ``config`` directory, copy templates to the same directory removing ``template.`` from the name. Change contents as needed. It's the config after all.
 2. [Update and pre-process caniuse.com data](#updating-and-pre-processing-data)
 3. For the page where you want to detect the browser, include 2 custom built libraries (Modernizr and lodash) and browserTest-min.js built in the previous step
 
 ``BT.test()`` does the full test, falling back to UA sniffing if necessary, and tells you if the detected set is a subset of your browser set configured in ``config/browserSet.js``
+
 ``BT.detectByFeatures()`` tests only by features, and calculates a diff between the browsers likely to be the one currently tested and those you define in browserSet.js.
 The diff object contains the intersection and difference between the set you wanna make sure the browser falls into (``config/browserSet.js``) and the set determined by tests. If there is only intersection, and no difference, then you got yourself what you were looking for.
 
