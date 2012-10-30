@@ -13,7 +13,7 @@
 
 BT.targetBrowserSet = { // the set you are trying to determine if the browser is contained in — copy this file to browserSet.js and modify to your needs
     "ie"      : ["8", "9", "10"],
-    "firefox" : ["14", "15", "16", "17"],
+    "firefox" : ["15", "16", "17"],
     "chrome"  : ["20", "21", "22"],
     "safari"  : ["5", "5.1", "6"]
 };
