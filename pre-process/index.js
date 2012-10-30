@@ -54,7 +54,7 @@
 
             var featureMatrix = {};
             _(modernizrToCaniuseMapping).each(function(v, k) {
-                var feature = _(data[v].stats);
+                var feature = data[v].stats;
                 var transformedFeature = {};
                 _.each(feature, function(versions, browser) {
                     transformedFeature[browser] = {};
