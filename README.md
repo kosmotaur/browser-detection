@@ -25,7 +25,7 @@ See ``test.html`` file to see an example.
 	* node data preprocessing
 		* get support data from Github at https://github.com/Fyrd/caniuse.git — the ``data.json`` file has both support data as well as a listing of past, current and near future browser versions
 		* extract needed information from ``data.json``
-			* write support data mappable to features detected by Modernizr (the mapping object can be found in ``prepare/index.js``) to ``supportData.js``
+			* write support data mappable to features detected by Modernizr (the mapping object can be found in ``pre-process/index.js``) to ``src/btData.js``
 			* write current browser versions to ``browserVersions.js``
 	* in the browser
 		* iterate through features of ``supportData.js``
@@ -49,7 +49,7 @@ See ``test.html`` file to see an example.
 
 ### Browser
 
-* [Modernizr](http://modernizr.com/) - custom build with selected feature tests found in ``prepare/index.js`` in ``modernizrToCaniuseMapping`` object
+* [Modernizr](http://modernizr.com/) - custom build with selected feature tests found in ``config/modernizrToCaniuseMapping.template.js`` in ``modernizrToCaniuseMapping`` object
 * [lodash](https://github.com/bestiejs/lodash) custom build: ``lodash category="collections, arrays" exports="global"`` (install it by ``npm install -g lodash``)
 
 ## License
