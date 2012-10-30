@@ -6,18 +6,23 @@ Currently it recognizes Safari, IE, Opera, and approximately recognizes Firefox 
 
 The script takes into account a set of browsers you wanna determine if the visitor falls in to. You configure that in ``config/browserSet.js``. If it is not possible to tell, it falls back to UA sniffing
 
-## Usage
+## Usage (make sure [prerequisites](#prerequisites) are met)
 
 1. In ``config`` directory, copy templates to the same directory removing ``template.`` from the name. Change contents as needed. It's the config after all.
 2. [Update and pre-process caniuse.com data](#updating-and-pre-processing-data)
-3. For the page where you want to detect the browser, include 2 custom built libraries (Modernizr and lodash) and browserTest-min.js built in the previous step
+3. For the page where you want to detect the browser, include 2 custom built libraries (Modernizr and lodash) and ``browserTest-min.js`` built in the previous step
 
 ``BT.test()`` does the full test, falling back to UA sniffing if necessary, and tells you if the detected set is a subset of your browser set configured in ``config/browserSet.js``
 
-``BT.detectByFeatures()`` tests only by features, and calculates a diff between the browsers likely to be the one currently tested and those you define in browserSet.js.
+``BT.detectByFeatures()`` tests only by features, and calculates a diff between the browsers likely to be the one currently tested and those you define in ``config/browserSet.js``.
 The diff object contains the intersection and difference between the set you wanna make sure the browser falls into (``config/browserSet.js``) and the set determined by tests. If there is only intersection, and no difference, then you got yourself what you were looking for.
 
 See ``test.html`` file to see an example.
+
+## Updating and pre-processing data
+1. ``$ cd pre-proces``
+2. ``$ npm install`` (only have to do this once)
+3. ``$ node index.js``
 
 ## Strategy
 
@@ -25,20 +30,14 @@ See ``test.html`` file to see an example.
 	* node data preprocessing
 		* get support data from Github at https://github.com/Fyrd/caniuse.git — the ``data.json`` file has both support data as well as a listing of past, current and near future browser versions
 		* extract needed information from ``data.json``
-			* write support data mappable to features detected by Modernizr (the mapping object can be found in ``pre-process/index.js``) to ``src/btData.js``
-			* write current browser versions to ``browserVersions.js``
+			* write support data mappable to features detected by Modernizr (the mapping object can be found in ``pre-process/index.js``) and current browser versions to ``src/btData.js``
 	* in the browser
-		* iterate through features of ``supportData.js``
-		* if Modernizr indicates feature is supported, get all browsers/versions from ``supportData`` which do not support that feature and remove those browseres/versions from ``browserVersions`` collection
-		* if Modernizr indicates feature is not supported, get all browsers/versions from ``supportData`` which support that feature and remove those browseres/versions from ``browserVersions`` collection
+		* iterate through features support data
+		* if Modernizr indicates feature is supported, get all browsers/versions from feature support data which do not support that feature and remove those browseres/versions from current browsers collection
+		* if Modernizr indicates feature is not supported, get all browsers/versions from feature support data which support that feature and remove those browseres/versions from from current browsers collection
 		* if remaining browsers is a non-emtpy subset of supported browsers collection, the currently checked browser is supported
 		* if remaining browsers is an empty set, move on to fallback
 * userAgent sniffing as fallback, based on [jQuery](http://jquery.com)'s solution
-
-## Updating and pre-processing data
-1. ``$ cd pre-proces``
-2. ``$ npm install`` (only have to do this once)
-3. ``$ node index.js``
 
 ## Prerequisites
 
@@ -47,7 +46,7 @@ See ``test.html`` file to see an example.
 * node >=v0.8
 * git CLI installed
 
-### Browser
+### Browser (both custom built libs are included)
 
 * [Modernizr](http://modernizr.com/) - custom build with selected feature tests found in ``config/modernizrToCaniuseMapping.template.js`` in ``modernizrToCaniuseMapping`` object
 * [lodash](https://github.com/bestiejs/lodash) custom build: ``lodash category="collections, arrays" exports="global"`` (install it by ``npm install -g lodash``)
